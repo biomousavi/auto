@@ -1,7 +1,17 @@
 import { plainToClass } from "class-transformer";
-import {  IsNotEmpty, IsNumber, IsString, validateSync } from "class-validator";
+import {  IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, validateSync } from "class-validator";
 
+
+enum EnvironmentEnum {
+  Development = "development",
+  Production = "production",
+  Test = "test",
+}
 export class EnvironmentVariables {
+  @IsOptional()
+  @IsEnum(EnvironmentEnum)
+  NODE_ENV: EnvironmentEnum;
+
   @IsNotEmpty()
   @IsNumber()
   BACKEND_PORT: number;
