@@ -6,6 +6,7 @@ import { PersistenceModule } from './persistence/persistence.module';
 import { EnvironmentVariables, validate } from './common/env.validation';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { InfrastructureModule } from './infrastructure/infrastructure.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       }),
     }),
     PersistenceModule,
+    InfrastructureModule,
   ],
   controllers: [AppController],
   providers: [AppService],
