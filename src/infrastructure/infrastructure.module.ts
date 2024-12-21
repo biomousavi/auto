@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EncryptionService } from './services/encryption.service';
 import { EnvironmentVariables } from 'src/common/env.validation';
+import { UserService } from './services/user.service';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { EnvironmentVariables } from 'src/common/env.validation';
       }),
     }),
   ],
-  providers: [CityService, AuthService, ZipCodeService, EncryptionService],
-  exports: [CityService, AuthService, ZipCodeService, EncryptionService],
+  providers: [CityService, AuthService, ZipCodeService, EncryptionService, UserService],
+  exports: [CityService, AuthService, ZipCodeService, EncryptionService, UserService],
 })
 export class InfrastructureModule {}
