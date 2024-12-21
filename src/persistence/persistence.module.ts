@@ -1,3 +1,4 @@
+// persistence/persistence.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Place } from './entities/place.entity';
@@ -10,6 +11,6 @@ import { UserRepository } from './repositories/user.repository';
 @Module({
   imports: [TypeOrmModule.forFeature([Place, City, User])],
   providers: [PlaceRepository, CityRepository, UserRepository],
-  exports: [],
+  exports: [PlaceRepository, CityRepository, UserRepository],
 })
 export class PersistenceModule {}
