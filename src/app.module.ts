@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { ThrottlerModule } from '@nestjs/throttler';
-import { AppService } from './app.service';
 import { PersistenceModule } from './persistence/persistence.module';
 import { EnvironmentVariables, validate } from './common/env.validation';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -31,7 +29,5 @@ import { ApiModule } from './api/api.module';
     InfrastructureModule,
     ApiModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
