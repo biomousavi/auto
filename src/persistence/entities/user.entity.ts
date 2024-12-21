@@ -8,4 +8,7 @@ export class User extends AbstractEntity {
 
   @Column()
   password: string;
+
+  @Column()
+  passwordIv: string;
 }
