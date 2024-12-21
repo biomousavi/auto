@@ -7,6 +7,7 @@ import { EnvironmentVariables, validate } from './common/env.validation';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { InfrastructureModule } from './infrastructure/infrastructure.module';
+import { ApiModule } from './api/api.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { InfrastructureModule } from './infrastructure/infrastructure.module';
     }),
     PersistenceModule,
     InfrastructureModule,
+    ApiModule,
   ],
   controllers: [AppController],
   providers: [AppService],
