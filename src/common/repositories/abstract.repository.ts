@@ -1,8 +1,8 @@
 // src/common/repositories/base.abstract.repository.ts
 import { Repository, DeepPartial, FindOptionsWhere } from 'typeorm';
-import { AbstractEntityType } from '../entities/abstract.entity';
+import { AbstractEntity } from '../entities/abstract.entity';
 
-export abstract class AbstractRepository<T extends AbstractEntityType> {
+export abstract class AbstractRepository<T extends AbstractEntity> {
   protected constructor(private readonly repository: Repository<T>) {}
 
   async create(data: DeepPartial<T>): Promise<T> {
