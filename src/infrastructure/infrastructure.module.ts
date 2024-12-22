@@ -9,9 +9,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EncryptionService } from './services/encryption.service';
 import { EnvironmentVariables } from 'src/common/env.validation';
 import { UserService } from './services/user.service';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
+    HttpModule,
     PersistenceModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
