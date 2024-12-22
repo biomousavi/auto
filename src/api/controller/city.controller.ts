@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { CityRequestDto } from '../dtos/city-request.dto';
@@ -7,10 +7,11 @@ import { PaginationQueryDto } from '../dtos/pagination-query.dto';
 import { GetRequestsQuery } from '../queries/get-requests.query';
 import { GetCityQuery } from '../queries/get-city.query';
 import { AbstractController } from '../../common/controllers/abstract.controller';
+import { JwtAuthGuard } from '../guards/jwt.guard';
 
 @ApiTags('Cities')
 @Controller('cities')
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 export class CityController extends AbstractController {
   constructor(private readonly queryBus: QueryBus) {
     super();
