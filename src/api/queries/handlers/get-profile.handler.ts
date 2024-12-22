@@ -7,7 +7,6 @@ export class GetProfileHandler implements IQueryHandler<GetProfileQuery> {
   constructor(private readonly userService: UserService) {}
 
   async execute(query: GetProfileQuery) {
-    console.log(query, 'executed');
-    return 'ok';
+    return this.userService.getUserProfile(query.userId);
   }
 }

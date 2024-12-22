@@ -1,9 +1,10 @@
-import { Injectable, ConflictException } from '@nestjs/common';
+import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
 import { User } from '../../persistence/entities/user.entity';
 import { EncryptionService } from './encryption.service';
 import { SignUpDto } from 'src/api/dtos/sign-up.dto';
 import { UserRepository } from 'src/persistence/repositories/user.repository';
 import { AuthService } from './auth.service';
+import { UserProfileDto } from 'src/api/dtos/user-profile.dto';
 
 @Injectable()
 export class UserService {
@@ -35,6 +36,18 @@ export class UserService {
     const token = await this.authService.getJwtToken(user.id, user.username);
 
     return { token };
+  }
+  async getUserProfile(userId: number) {
+    const user = await this.userRepository.findOne({ id: userId });
+
+    if (!user) throw new NotFoundException('User not found');
+
+    const decryptedPassword = this.encryptionService.decrypt(user.password, user.passwordIv);
+
+    return {
+      username: user.username,
+      password: decryptedPassword,
+    };
   }
 
   async decryptUserPassword(user: User): Promise<string> {
