@@ -2,37 +2,42 @@ services:
   dev:
     build:
       context: .
-      target: development 
+      target: development
       dockerfile: ./Dockerfile
-    env_file: ./.env 
+    env_file: ./.env
     container_name: backend-dev
     restart: unless-stopped
+    networks:
+      - web-network
     volumes:
-      - .:/app 
-      - /app/node_modules 
+      - .:/app
+      - /app/node_modules
     depends_on:
       - postgres
     ports:
-      - "${BACKEND_PORT}:${BACKEND_PORT}" 
-    command: "npm run start:debug"
-    environment:
-      - PG_URL=${PG_URL}
+      - '${BACKEND_PORT}:${BACKEND_PORT}'
+    command: 'npm run start:debug'
 
-  prod:
+  api:
     build:
       context: .
       target: production
       dockerfile: ./Dockerfile
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
     env_file: ./.env
-    container_name: backend-prod
     restart: unless-stopped
+    networks:
+      - web-network
     depends_on:
       - postgres
     ports:
-      - ${BACKEND_PORT}:${BACKEND_PORT}
-    command: "dist/main.js" 
-    environment:
-      - PG_URL=${PG_URL}
+      - 3000-3002:${BACKEND_PORT}
+    command: 'dist/main.js'
 
   postgres:
     image: postgres:16-alpine
@@ -42,10 +47,28 @@ services:
       POSTGRES_DB: ${PG_DATABASE}
       POSTGRES_USER: ${PG_USERNAME}
       POSTGRES_PASSWORD: ${PG_PASSWORD}
+    networks:
+      - web-network
     ports:
       - ${PG_PORT}:5432
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - web-network
+    depends_on:
+      - api
+      - postgres
+
+networks:
+  web-network:
+    driver: bridge
 
 volumes:
   postgres_data:
