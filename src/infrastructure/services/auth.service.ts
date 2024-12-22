@@ -1,18 +1,31 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
+interface JwtPayload {
+  sub: number;
+  username: string;
+  iat: number;
+}
 @Injectable()
 export class AuthService {
-  constructor(
-    private readonly jwtService: JwtService,
-  ) {}
+  constructor(private readonly jwtService: JwtService) {}
 
   async getJwtToken(id: number, username: string) {
-    return this.jwtService.sign({
+    const payload: JwtPayload = {
       sub: id,
-      username: username,
-      // get time by seconds from seconds
+      username,
       iat: Math.floor(Date.now() / 1000),
-    });
+    };
+
+    return this.jwtService.sign(payload);
+  }
+
+  async verifyJwtToken(token: string) {
+    try {
+      const decoded = await this.jwtService.verifyAsync<JwtPayload>(token);
+      return decoded;
+    } catch (error) {
+      throw new UnauthorizedException('Token is not valid.');
+    }
   }
 }
