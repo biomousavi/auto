@@ -1,7 +1,6 @@
-import { Controller, Get, HttpStatus, Res } from '@nestjs/common';
+import { Get, HttpStatus, Res } from '@nestjs/common';
 import { Response } from 'express';
 
-@Controller('api')
 export abstract class AbstractController {
   @Get('/health')
   checkHealth(@Res() res: Response) {
