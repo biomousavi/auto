@@ -8,14 +8,14 @@ import { AbstractRepository } from 'src/common/repositories/abstract.repository'
 export class PlaceRepository extends AbstractRepository<Place> {
   constructor(
     @InjectRepository(Place)
-    private placeRepository: Repository<Place>
+    private placeRepository: Repository<Place>,
   ) {
     super(placeRepository);
   }
 
   async findByCity(cityId: number): Promise<Place[]> {
     return this.placeRepository.find({
-      where: { city: { id: cityId } }
+      where: { city: { id: cityId } },
     });
   }
 }

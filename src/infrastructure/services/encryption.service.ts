@@ -15,11 +15,8 @@ export class EncryptionService {
   encrypt(text: string): { encryptedData: string; iv: string } {
     const iv = crypto.randomBytes(ENCRYPTION_CONFIG.IV_LENGTH);
     const cipher = crypto.createCipheriv(this.algorithm, this.key, iv);
-    
-    const encrypted = Buffer.concat([
-      cipher.update(text, 'utf8'),
-      cipher.final(),
-    ]);
+
+    const encrypted = Buffer.concat([cipher.update(text, 'utf8'), cipher.final()]);
 
     return {
       encryptedData: encrypted.toString('hex'),
@@ -28,16 +25,9 @@ export class EncryptionService {
   }
 
   decrypt(encryptedData: string, iv: string): string {
-    const decipher = crypto.createDecipheriv(
-      this.algorithm, 
-      this.key, 
-      Buffer.from(iv, 'hex')
-    );
-    
-    const decrypted = Buffer.concat([
-      decipher.update(Buffer.from(encryptedData, 'hex')),
-      decipher.final(),
-    ]);
+    const decipher = crypto.createDecipheriv(this.algorithm, this.key, Buffer.from(iv, 'hex'));
+
+    const decrypted = Buffer.concat([decipher.update(Buffer.from(encryptedData, 'hex')), decipher.final()]);
 
     return decrypted.toString('utf8');
   }

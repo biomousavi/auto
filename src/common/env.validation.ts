@@ -1,11 +1,10 @@
-import { plainToClass } from "class-transformer";
-import {  IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, validateSync } from "class-validator";
-
+import { plainToClass } from 'class-transformer';
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, validateSync } from 'class-validator';
 
 enum EnvironmentEnum {
-  Development = "development",
-  Production = "production",
-  Test = "test",
+  Development = 'development',
+  Production = 'production',
+  Test = 'test',
 }
 export class EnvironmentVariables {
   @IsOptional()

@@ -1,4 +1,3 @@
-// infrastructure/services/city.service.ts
 import { Injectable } from '@nestjs/common';
 import { CityRepository } from '../../persistence/repositories/city.repository';
 import { ZipCodeService } from './zip-code.service';
@@ -10,5 +9,5 @@ export class CityService {
     private readonly zipCodeService: ZipCodeService,
   ) {}
 
-  async getCityByZipCode(zipCode: string) {}
+  // async getCityByZipCode(zipCode: string) {}
 }

@@ -1,4 +1,4 @@
-import { BadRequestException, HttpStatus, ValidationPipe } from "@nestjs/common";
+import { BadRequestException, HttpStatus, ValidationPipe } from '@nestjs/common';
 
 const GlobalValidationPipe = new ValidationPipe({
   whitelist: true,
@@ -11,7 +11,7 @@ const GlobalValidationPipe = new ValidationPipe({
 
     if (transformedErrors) {
       return new BadRequestException({
-        error: "Bad Request",
+        error: 'Bad Request',
         message: transformedErrors,
         statusCode: HttpStatus.BAD_REQUEST,
       });

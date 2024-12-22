@@ -1,10 +1,8 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ZipCodeService {
   private readonly apiBaseUrl = 'https://api.zippopotam.us/us';
 
-  async fetchCityData(zipCode: string) {
-
-  }
+  // async fetchCityData(zipCode: string) {}
 }

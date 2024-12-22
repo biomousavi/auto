@@ -8,7 +8,7 @@ import { AbstractRepository } from 'src/common/repositories/abstract.repository'
 export class UserRepository extends AbstractRepository<User> {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>
+    private userRepository: Repository<User>,
   ) {
     super(userRepository);
   }

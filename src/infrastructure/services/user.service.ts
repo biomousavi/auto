@@ -4,7 +4,7 @@ import { EncryptionService } from './encryption.service';
 import { SignUpDto } from 'src/api/dtos/sign-up.dto';
 import { UserRepository } from 'src/persistence/repositories/user.repository';
 import { AuthService } from './auth.service';
-import { UserProfileDto } from 'src/api/dtos/user-profile.dto';
+// import { UserProfileDto } from 'src/api/dtos/user-profile.dto';
 
 @Injectable()
 export class UserService {
