@@ -7,7 +7,6 @@ export class GetMyRequestsHandler implements IQueryHandler<GetRequestsQuery> {
   constructor(private readonly cityService: CityService) {}
 
   async execute(query: GetRequestsQuery) {
-    console.log(query, 'executed');
-    return 'ok';
+    return this.cityService.getCityRequests(query);
   }
 }
