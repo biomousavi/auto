@@ -6,7 +6,7 @@ import { UserProfileDto } from '../dtos/user-profile.dto';
 import { CurrentUser } from '../decorators/current-user.decorator';
 import { SignUpCommand } from '../commands/sign-up.command';
 import { GetProfileQuery } from '../queries/get-profile.query';
-import { AbstractController } from './abstract.controller';
+import { AbstractController } from '../../common/controllers/abstract.controller';
 import { JwtAuthGuard } from '../guards/jwt.guard';
 
 @ApiTags('Users')

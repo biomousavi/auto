@@ -6,7 +6,7 @@ import { CurrentUser } from '../decorators/current-user.decorator';
 import { PaginationQueryDto } from '../dtos/pagination-query.dto';
 import { GetRequestsQuery } from '../queries/get-requests.query';
 import { GetCityQuery } from '../queries/get-city.query';
-import { AbstractController } from './abstract.controller';
+import { AbstractController } from '../../common/controllers/abstract.controller';
 
 @ApiTags('Cities')
 @Controller('cities')
