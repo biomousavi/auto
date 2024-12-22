@@ -4,6 +4,8 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { EnvironmentVariables } from './common/env.validation';
 import { GlobalValidationPipe } from './common/validation.pipe';
+import { SwaggerModule } from '@nestjs/swagger';
+import { swaggerConfig } from './common/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,6 +21,10 @@ async function bootstrap() {
 
   // security middleware
   app.use(helmet());
+
+  // swagger config
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
+  SwaggerModule.setup('/docs', app, document);
 
   // Start the app
   await app.listen(configService.get('BACKEND_PORT'), '0.0.0.0', async () => {
