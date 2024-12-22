@@ -1,15 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UserRepository } from '../../persistence/repositories/user.repository';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly userRepository: UserRepository,
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateUser(email: string, password: string) {}
-
-  async login(user: any) {}
+  async getJwtToken(id: number, username: string) {
+    return this.jwtService.sign({
+      sub: id,
+      username: username,
+      // get time by seconds from seconds
+      iat: Math.floor(Date.now() / 1000),
+    });
+  }
 }
