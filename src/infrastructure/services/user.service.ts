@@ -4,11 +4,12 @@ import { User } from '../../persistence/entities/user.entity';
 import { EncryptionService } from './encryption.service';
 import { SignUpDto } from 'src/api/dtos/sign-up.dto';
 import { UserRepository } from 'src/persistence/repositories/user.repository';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class UserService {
   constructor(
-    private readonly jwtService: JwtService,
+    private readonly authService: AuthService,
     private readonly userRepository: UserRepository,
     private readonly encryptionService: EncryptionService,
   ) {}
@@ -32,12 +33,7 @@ export class UserService {
     });
 
     // Generate JWT token
-    const token = this.jwtService.sign({
-      sub: user.id,
-      username: user.username,
-      // get time by seconds from seconds
-      iat: Math.floor(Date.now() / 1000),
-    });
+    const token = await this.authService.getJwtToken(user.id, user.username);
 
     return { token };
   }
