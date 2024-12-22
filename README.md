@@ -1,6 +1,7 @@
 TODO: things that need to be implemented
 
-- cache the post code request result
+- cache the post-code requests result
+- store user requests history asynchronously (use a queue)
 - add circuit breaker for external request
 - add E2E and Unit test
 - we can exclude some properties in response. (created_on, updated_on, id)
