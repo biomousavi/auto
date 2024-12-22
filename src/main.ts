@@ -14,6 +14,9 @@ async function bootstrap() {
   // Add global validation pipe
   app.useGlobalPipes(GlobalValidationPipe);
 
+  // add global prefix for controllers
+  app.setGlobalPrefix('/api');
+
   // security middleware
   app.use(helmet());
 
