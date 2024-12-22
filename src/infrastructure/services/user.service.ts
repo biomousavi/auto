@@ -1,5 +1,4 @@
 import { Injectable, ConflictException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { User } from '../../persistence/entities/user.entity';
 import { EncryptionService } from './encryption.service';
 import { SignUpDto } from 'src/api/dtos/sign-up.dto';
