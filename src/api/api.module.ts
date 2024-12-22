@@ -7,10 +7,11 @@ import { GetProfileHandler } from './queries/handlers/get-profile.handler';
 import { GetCityHandler } from './queries/handlers/get-city.handler';
 import { GetMyRequestsHandler } from './queries/handlers/get-requests.handler';
 import { QueryHandlers } from './queries/handlers';
+import { CommandHandlers } from './commands/handlers';
 
 @Module({
   imports: [CqrsModule, InfrastructureModule],
   controllers: [UserController, CityController],
-  providers: [...QueryHandlers, GetProfileHandler, GetCityHandler, GetMyRequestsHandler],
+  providers: [...QueryHandlers, ...CommandHandlers, GetProfileHandler, GetCityHandler, GetMyRequestsHandler],
 })
 export class ApiModule {}
