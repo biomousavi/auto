@@ -21,7 +21,7 @@ export class CityService {
   async getCityRequests(query: GetRequestsQuery) {
     const requests = await this.cityRepository.findAll({
       where: { user: { id: query.userId } },
-      relations: ['places', 'user'],
+      relations: ['places'],
       order: { created_on: 'DESC' },
       take: query.limit,
       skip: (query.page - 1) * query.limit,
