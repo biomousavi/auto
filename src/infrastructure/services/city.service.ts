@@ -1,13 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { CityRepository } from '../../persistence/repositories/city.repository';
-import { ZipCodeService } from './zip-code.service';
+import { CityRequestDto } from 'src/api/dtos/city-request.dto';
 
 @Injectable()
 export class CityService {
-  constructor(
-    private readonly cityRepository: CityRepository,
-    private readonly zipCodeService: ZipCodeService,
-  ) {}
+  constructor(private readonly cityRepository: CityRepository) {}
 
-  // async getCityByZipCode(zipCode: string) {}
+  async saveCity(data: CityRequestDto, userId: number) {
+    const city = await this.cityRepository.create({
+      postCode: data.postCode,
+      country: data.country,
+      user: { id: userId },
+      places: data.places,
+    });
+
+    return city;
+  }
 }
