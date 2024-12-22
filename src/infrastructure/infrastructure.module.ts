@@ -18,7 +18,7 @@ import { UserService } from './services/user.service';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService<EnvironmentVariables>) => ({
         secret: configService.get('JWT_ACCESS_TOKEN_SECRET'),
-        signOptions: { expiresIn: '1h' },
+        signOptions: { expiresIn: '3h' },
       }),
     }),
   ],
