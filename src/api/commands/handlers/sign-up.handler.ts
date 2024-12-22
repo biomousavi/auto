@@ -7,8 +7,9 @@ export class SignUpHandler implements ICommandHandler<SignUpCommand> {
   constructor(private readonly userService: UserService) {}
 
   async execute(command: SignUpCommand) {
-    console.log(command, 'executed');
-
-    return 'ok';
+    return this.userService.signUp({
+      username: command.username,
+      password: command.password,
+    });
   }
 }

@@ -9,7 +9,6 @@ import { GetProfileQuery } from '../queries/get-profile.query';
 import { AbstractController } from './abstract.controller';
 
 @ApiTags('Users')
-
 @Controller('users')
 export class UserController extends AbstractController {
   constructor(
@@ -24,7 +23,6 @@ export class UserController extends AbstractController {
   @ApiResponse({ status: 201, description: 'Returns JWT token' })
   async signUp(@Body() signUpDto: SignUpDto): Promise<{ token: string }> {
     const command = new SignUpCommand(signUpDto.username, signUpDto.password);
-
     return this.commandBus.execute(command);
   }
 
