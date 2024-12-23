@@ -6,6 +6,7 @@ import { EnvironmentVariables } from './common/env.validation';
 import { GlobalValidationPipe } from './common/validation.pipe';
 import { SwaggerModule } from '@nestjs/swagger';
 import { swaggerConfig } from './common/swagger';
+import { GlobalExceptionFilter } from './common/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,6 +16,9 @@ async function bootstrap() {
 
   // Add global validation pipe
   app.useGlobalPipes(GlobalValidationPipe);
+
+  // Apply the filter globally
+  app.useGlobalFilters(new GlobalExceptionFilter());
 
   // add global prefix for controllers
   app.setGlobalPrefix('/api');
