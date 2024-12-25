@@ -1,4 +1,4 @@
-import { BadRequestException, HttpStatus, ValidationPipe } from '@nestjs/common';
+import { BadRequestException, ValidationPipe } from '@nestjs/common';
 
 const GlobalValidationPipe = new ValidationPipe({
   whitelist: true,
@@ -6,18 +6,10 @@ const GlobalValidationPipe = new ValidationPipe({
   exceptionFactory: (errors) => {
     const transformedErrors = {};
     for (const error of errors) {
-      transformedErrors[error.property] = error.constraints[Object.keys(error.constraints)[0]];
+      transformedErrors[error.property] = Object.values(error.constraints)[0];
     }
 
-    if (transformedErrors) {
-      return new BadRequestException({
-        error: 'Bad Request',
-        message: transformedErrors,
-        statusCode: HttpStatus.BAD_REQUEST,
-      });
-    } else {
-      return new BadRequestException(errors);
-    }
+    return new BadRequestException({ message: 'Validation failed', errors: transformedErrors });
   },
 });
 
